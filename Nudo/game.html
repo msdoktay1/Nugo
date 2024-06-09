@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Tıklama Oyunu</title>
+<style>
+  body {
+    text-align: center;
+    margin-top: 50px;
+  }
+  #oyunAlani {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    background-color: #f0f0f0;
+    border: 1px solid #000;
+    position: relative;
+  }
+  #puan {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div id="oyunAlani" onclick="puanArttir()">
+  Tıkla ve Puan Kazan!
+</div>
+<div id="puan">Puan: 0</div>
+
+<script>
+  var puan = 0;
+
+  function puanArttir() {
+    puan++;
+    document.getElementById('puan').innerHTML = 'Puan: ' + puan;
+  }
+</script>
+</body>
+</html>
