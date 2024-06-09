@@ -5,7 +5,7 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // Oyunun short_name'ini ve URL'sini tanımlayın
 const GAME_SHORT_NAME = 'Nugo';
-const GAME_URL = 'https://telegram.org/js/games.js';
+const GAME_URL = 'https://msdoktay1.github.io/Nugo/';
 
 bot.command('start', (ctx) => {
   // Oyunu kullanıcıya gönder
