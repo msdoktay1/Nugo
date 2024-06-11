@@ -41,7 +41,7 @@
         <div class="score">Skor: <span id="score">0</span></div>
         <div class="target" onclick="increaseScore()"></div>
     </div>
-    <script>
+    <script type="module" src="bot.js">
         import { TelegramBot } from 'node-telegram-bot-api';
         const token = 'YOUR_TELEGRAM_BOT_TOKEN'; // Gerçek tokeninizi buraya girin.
         const telegramBot = new TelegramBot(token, { polling: true });
