@@ -55,15 +55,16 @@ telegramBot.onText(/\/start/, (msg) => {
     const chat_id = msg.chat.id;
     telegramBot.sendMessage(chat_id, 'Oyun başladı! Skorunuzu artırmak için hedefe tıklayın.');
     // Kullanıcının skorunu başlat
-    telegramBot.context.user_data[chat_id] = { score: 0 };
+    telegramBot.context.user_data[chat_id] = { score: 10 };
 });
 
 telegramBot.on('callback_query', (callbackQuery) => {
     const chat_id = callbackQuery.message.chat.id;
+    console.log(chat_id);
     // Skoru güncelle
     if (callbackQuery.data === 'increase_score') {
         telegramBot.context.user_data[chat_id].score++;
-        telegramBot.answerCallbackQuery(callbackQuery.id, {
+        telegramBot.answerCbQuery(callbackQuery.id, {
             text: `Skorunuz: ${telegramBot.context.user_data[chat_id].score}`
         });
     }
