@@ -22,7 +22,7 @@
             height: 50px;
             background-color: #333;
             border-radius: 50%;
-            margin: 10px;
+            margin: 90%px;
             cursor: pointer;
         }
         .score {
@@ -40,9 +40,34 @@
         let score = 0;
 
         function increaseScore() {
-            score++;
-            document.getElementById('score').innerText = score;
-        }
+    score++;
+    document.getElementById('score').innerText = score;
+    // Skoru Telegram botuna gönder
+    telegramBot.sendMessage(chat_id, `Yeni skor: ${score}`);
+}
+
+// Telegram bot kodu...
+const TelegramBot = require('node-telegram-bot-api');
+const token = 'YOUR_TELEGRAM_BOT_TOKEN';
+const telegramBot = new TelegramBot(token, { polling: true });
+
+telegramBot.onText(/\/start/, (msg) => {
+    const chat_id = msg.chat.id;
+    telegramBot.sendMessage(chat_id, 'Oyun başladı! Skorunuzu artırmak için hedefe tıklayın.');
+    // Kullanıcının skorunu başlat
+    telegramBot.context.user_data[chat_id] = { score: 0 };
+});
+
+telegramBot.on('callback_query', (callbackQuery) => {
+    const chat_id = callbackQuery.message.chat.id;
+    // Skoru güncelle
+    if (callbackQuery.data === 'increase_score') {
+        telegramBot.context.user_data[chat_id].score++;
+        telegramBot.answerCallbackQuery(callbackQuery.id, {
+            text: `Skorunuz: ${telegramBot.context.user_data[chat_id].score}`
+        });
+    }
+});
     </script>
 </body>
 </html>

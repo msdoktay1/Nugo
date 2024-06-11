@@ -4,35 +4,47 @@ const BOT_TOKEN = '7442648171:AAGL_JtyXx6XGXNCKnOIcJF-ITXud8alFTo';
 const bot = new Telegraf(BOT_TOKEN);
 
 // Oyunun short_name'ini ve URL'sini tanımlayın
-const GAME_SHORT_NAME = 'nugocoin';
-const GAME_URL = 'https://msdoktay1.github.io/Nugo/index.html?';
+const GAME_SHORT_NAME = 'nugo';
+const GAME_URL = 'https://msdoktay1.github.io/Nugo';
 
-bot.command('start', (ctx) => {
-    // Oyunu kullanıcıya gönder
-    ctx.replyWithGame(GAME_SHORT_NAME);
+//bot.command('play', (ctx) => {
+// Oyunu kullanıcıya gönder
+//ctx.replyWithGame(GAME_SHORT_NAME);
+//});
+bot.command('openurl', (ctx) => {
+    // Oyununuzun fotoğrafını burada gönderin
+    ctx.replyWithPhoto({ source: 'photo.jpg' }).then((result) => {
+        const file_id = result.photo[result.photo.length - 1].file_id;
+        console.log('Fotoğrafın file_id:', file_id);
+    }).catch((err) => {
+        console.log('Fotoğraf gönderilirken bir hata oluştu:', err);
+    });
 });
-bot.command('start', (ctx) => {
-    ctx.reply('Oyunu başlatmak için aşağıdaki butona tıklayın:', {
+bot.command('play', (ctx) => {
+    ctx.replyWithPhoto('AgACAgQAAxkDAAIBOGZo0d3WAhmkLouvkS6Ybp-15kbgAAK1wTEbTPZAU4bPAmyq91X7AQADAgADeAADNQQ', {
+        caption: 'Nugo\nOyunu oynamak açmak için butona tıklayın:',
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Nugo Oyna', url: 'https://msdoktay1.github.io/Nugo/' }]
+                [{ text: 'Play', url: 't.me/Nugo_Coin_Bot/nugo' }]
             ]
         }
     });
 });
 
-
 // CallbackQuery'yi yakala ve oyunu başlat
-bot.on('callback_query', (ctx) => {
+bot.gameQuery(async (ctx) => {
     const callbackQueryId = ctx.callbackQuery.id;
     const gameShortName = ctx.callbackQuery.game_short_name;
+    const gameUrl = ctx.callbackQuery.url;
     console.log(gameShortName);
+    console.log(gameUrl);
     console.log(GAME_SHORT_NAME);
     if (gameShortName === GAME_SHORT_NAME) {
         // Oyun URL'sine yönlendir
-        ctx.answerCbQuery(callbackQueryId, undefined, false, { url: GAME_URL });
+        await ctx.answerGameQuery("t.me/Nugo_Coin_Bot/nugo");
     }
 });
 
 // Botu başlat
 bot.launch();
+//https://t.me/Nugo_Coin_Bot/nugo
