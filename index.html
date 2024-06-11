@@ -41,6 +41,16 @@
         <div class="score">Skor: <span id="score">0</span></div>
         <div class="target" onclick="increaseScore()"></div>
     </div>
+    <script>
+        let score = 0;
+        
+        function increaseScore() {
+            score++;
+            document.getElementById('score').innerText = score;
+            // Burada skoru Telegram botuna göndermek için bir işlem yapamazsınız,
+            // çünkü bu kod tarayıcıda çalışıyor ve bot sunucuda çalışıyor.
+        }
+        </script>
     <script src="index.js"></script>
 </body>
 

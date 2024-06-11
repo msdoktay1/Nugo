@@ -2,14 +2,6 @@ const { TelegramBot } = require('node-telegram-bot-api');
 const token = '7442648171:AAGL_JtyXx6XGXNCKnOIcJF-ITXud8alFTo'; // Gerçek tokeninizi buraya girin.
 const telegramBot = new TelegramBot(token, { polling: true });
 // Telegram bot kodu...
-let score = 0;
-
-function increaseScore() {
-    score++;
-    document.getElementById('score').innerText = score;
-    // Burada skoru Telegram botuna göndermek için bir işlem yapamazsınız,
-    // çünkü bu kod tarayıcıda çalışıyor ve bot sunucuda çalışıyor.
-}
 export { increaseScore };
 // Telegram bot kodu...
 // Bu kısım, botunuzun sunucusunda çalışacak.
