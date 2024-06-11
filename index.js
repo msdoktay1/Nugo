@@ -1,5 +1,5 @@
 import { TelegramBot } from 'node-telegram-bot-api';
-const token = 'YOUR_TELEGRAM_BOT_TOKEN'; // Gerçek tokeninizi buraya girin.
+const token = '7442648171:AAGL_JtyXx6XGXNCKnOIcJF-ITXud8alFTo'; // Gerçek tokeninizi buraya girin.
 const telegramBot = new TelegramBot(token, { polling: true });
 // Telegram bot kodu...
 let score = 0;
