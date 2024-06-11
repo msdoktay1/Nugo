@@ -1,1 +1,36 @@
-console.log('Merhaba, dünya!');
+import { TelegramBot } from 'node-telegram-bot-api';
+const token = 'YOUR_TELEGRAM_BOT_TOKEN'; // Gerçek tokeninizi buraya girin.
+const telegramBot = new TelegramBot(token, { polling: true });
+// Telegram bot kodu...
+let score = 0;
+
+function increaseScore() {
+    score++;
+    document.getElementById('score').innerText = score;
+    // Burada skoru Telegram botuna göndermek için bir işlem yapamazsınız,
+    // çünkü bu kod tarayıcıda çalışıyor ve bot sunucuda çalışıyor.
+}
+export { increaseScore };
+// Telegram bot kodu...
+// Bu kısım, botunuzun sunucusunda çalışacak.
+
+// Kullanıcı skorlarını saklamak için bir nesne
+const userScores = {};
+
+telegramBot.onText(/\/start/, (msg) => {
+    const chat_id = msg.chat.id;
+    telegramBot.sendMessage(chat_id, 'Oyun başladı! Skorunuzu artırmak için hedefe tıklayın.');
+    // Kullanıcının skorunu başlat
+    userScores[chat_id] = 0;
+});
+
+telegramBot.on('callback_query', (callbackQuery) => {
+    const chat_id = callbackQuery.message.chat.id;
+    // Skoru güncelle
+    if (callbackQuery.data === 'increase_score') {
+        userScores[chat_id]++;
+        telegramBot.answerCallbackQuery(callbackQuery.id, {
+            text: `Skorunuz: ${userScores[chat_id]}`
+        });
+    }
+});
