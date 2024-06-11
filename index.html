@@ -54,7 +54,7 @@
 
         // Telegram bot kodu...
         // Bu kısım, botunuzun sunucusunda çalışacak.
-        const TelegramBot = require('node-telegram-bot-api');
+        import { TelegramBot } from 'node-telegram-bot-api';
         const token = 'YOUR_TELEGRAM_BOT_TOKEN'; // Gerçek tokeninizi buraya girin.
         const telegramBot = new TelegramBot(token, { polling: true });
 
