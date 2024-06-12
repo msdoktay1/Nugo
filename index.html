@@ -43,15 +43,26 @@
     </div>
     <script>
         let score = 0;
-        
+        const chatId = '961183898'; // Telegram chat ID'nizi buraya girin
+
         function increaseScore() {
             score++;
             document.getElementById('score').innerText = score;
-            // Burada skoru Telegram botuna göndermek için bir işlem yapamazsınız,
-            // çünkü bu kod tarayıcıda çalışıyor ve bot sunucuda çalışıyor.
+            
+            // Skoru sunucuya gönder
+            fetch('http://127.0.0.1:3000/submit-score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ score, chatId })
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Hata:', error));
         }
-        </script>
-    <script type="module" src="index.js"></script>
+    </script>
 </body>
+
 
 </html>

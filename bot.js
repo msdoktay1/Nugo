@@ -12,6 +12,8 @@ const GAME_URL = 'https://msdoktay1.github.io/Nugo';
 //ctx.replyWithGame(GAME_SHORT_NAME);
 //});
 bot.command('openurl', (ctx) => {
+    const callbackQueryId = ctx.message.chat.id;
+    console.log(callbackQueryId);
     // Oyununuzun fotoğrafını burada gönderin
     ctx.replyWithPhoto({ source: 'photo.jpg' }).then((result) => {
         const file_id = result.photo[result.photo.length - 1].file_id;
@@ -33,7 +35,7 @@ bot.command('play', (ctx) => {
 
 // CallbackQuery'yi yakala ve oyunu başlat
 bot.gameQuery(async (ctx) => {
-    const callbackQueryId = ctx.callbackQuery.id;
+    const callbackQueryId = ctx.callbackQuery.message.chat.id;
     const gameShortName = ctx.callbackQuery.game_short_name;
     const gameUrl = ctx.callbackQuery.url;
     console.log(gameShortName);

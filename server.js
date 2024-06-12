@@ -1,24 +1,26 @@
+const { Telegraf } = require('telegraf');
 const express = require('express');
-const TelegramBot = require('node-telegram-bot-api');
+const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const bot = new Telegraf('7442648171:AAGL_JtyXx6XGXNCKnOIcJF-ITXud8alFTo');
 
-// Telegram bot tokeninizi buraya girin
-const token = '7442648171:AAGL_JtyXx6XGXNCKnOIcJF-ITXud8alFTo';
-const bot = new TelegramBot(token, { polling: true });
+app.use(bodyParser.json());
 
-// JSON gövde işleyici middleware'ini kullan
-app.use(express.json());
-
-// Skor güncelleme endpoint'i
-app.post('/update-score', (req, res) => {
-  const { chatId, score } = req.body;
-  bot.sendMessage(chatId, `Yeni skorunuz: ${score}`);
-  res.status(200).send('Skor güncellendi');
+// Skorları alacak endpoint
+app.post('/submit-score', (req, res) => {
+  const { score, chatId } = req.body;
+  
+  // Burada skoru Telegram botuna gönderme işlemi yapılır
+  bot.telegram.sendMessage(chatId, `Yeni skorunuz: ${score}`);
+  
+  res.status(200).send('Skor kaydedildi');
 });
 
-// Sunucuyu başlat
-app.listen(port, () => {
-  console.log(`Sunucu http://localhost:${port} adresinde çalışıyor`);
+// Express sunucusunu başlat
+app.listen(3000, () => {
+  console.log('Sunucu 3000 portunda çalışıyor');
 });
+
+// Botu başlat
+bot.launch();
