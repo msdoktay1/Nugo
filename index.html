@@ -42,41 +42,6 @@
         <div class="target" onclick="increaseScore()"></div>
     </div>
     <script>
-        import { initializeApp } from 'firebase/app';
-        import { getFirestore, collection, addDoc } from 'firebase/firestore';
-
-        // Firebase yapılandırma nesneniz
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // Firebase uygulamasını başlat
-        const app = initializeApp(firebaseConfig);
-
-        // Firestore örneğini al
-        const db = getFirestore(app);
-
-        // Veri eklemek için bir fonksiyon
-        async function addData() {
-            try {
-                const docRef = await addDoc(collection(db, "users"), {
-                    first: "Ada",
-                    last: "Lovelace",
-                    born: 1815
-                });
-                console.log("Document written with ID: ", docRef.id);
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            }
-        }
-
-        // Fonksiyonu çağır
-        addData();
         let score = 0;
 
         function increaseScore() {
@@ -84,6 +49,7 @@
             document.getElementById('score').innerText = score;
         }
     </script>
+    <script type="module" src="index.js"></script>
 </body>
 
 
