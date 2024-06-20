@@ -5,54 +5,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nugo Oyunu</title>
-  <style>
-    body {
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      background-color: #f7f7f7;
-    }
-
-    .game-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .target {
-      width: 50px;
-      height: 50px;
-      background-color: #333;
-      border-radius: 50%;
-      margin: 90%px;
-      cursor: pointer;
-    }
-
-    .score {
-      font-size: 24px;
-      margin: 20px;
-    }
-  </style>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-  <div class="game-container">
-    <div class="score">Skor: <span id="score">0</span></div>
-    <div class="target" onclick="increaseScore()"></div>
+<body id="body">
+  <div id="spinner-container">
+    <div id="spinner">
+      <div class="spinnerin"></div>
+    </div>
   </div>
+  <div id="container">
+    <div class="column">
+      <div class="row">
+        <div class="game-container">
+          <div class="boxes-container">
+            <div class="box1"><span class="box-text">Tıklama Başı Kazanç</span>
+              <div class="tiklama-basi">1</div>
+            </div>
+            <div class="box2">Level Atlamak İçin<div class="level">10000</div>
+            </div>
+            <div class="box3">Saatlik Kazanç<div class="saatlik">0</div>
+            </div>
+          </div>
+          <div class="score">
+            <img src="./models/goat1/coin2.png" alt="Icon" id="score-icon" class="score-icon">
+            <span id="score">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="circle-row">
+        <div class="circle-border" id="click">
+          <img src="./models/goat1/goat.png" alt="Click Me" id="goatImage">
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="nav-bar">
+    <a href="#" class="nav-link" id="active" data-page="index.html">Exchange</a>
+    <a href="#" class="nav-link" data-page="mine.html">Mine</a>
+    <a href="#" class="nav-link" data-page="home">Friends</a>
+    <a href="#" class="nav-link" data-page="home">Earn</a>
+  </nav>
   <script>
-    let score = 0;
-
-    function increaseScore() {
-      score++;
-      document.getElementById('score').innerText = score;
+    function navigateTo(page) {
+      window.location.href = page;
     }
   </script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script type="module" src="index.js"></script>
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
 </body>
-
 
 </html>

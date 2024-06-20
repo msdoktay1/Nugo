@@ -5,7 +5,7 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // Oyunun short_name'ini ve URL'sini tanımlayın
 const GAME_SHORT_NAME = 'nugo';
-const GAME_URL = 'https://msdoktay1.github.io/Nugo';
+const GAME_URL = 't.me/Nugo_Coin_Bot/nugo';
 
 //bot.command('play', (ctx) => {
 // Oyunu kullanıcıya gönder
@@ -23,11 +23,13 @@ bot.command('openurl', (ctx) => {
     });
 });
 bot.command('play', (ctx) => {
+    const telegramUserId = ctx.message.from.id;
+    console.log("asdfasdfasd : ",telegramUserId);
     ctx.replyWithPhoto('AgACAgQAAxkDAAIBOGZo0d3WAhmkLouvkS6Ybp-15kbgAAK1wTEbTPZAU4bPAmyq91X7AQADAgADeAADNQQ', {
         caption: 'Nugo\nOyunu oynamak açmak için butona tıklayın:',
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Play', url: 't.me/Nugo_Coin_Bot/nugo' }]
+                [{ text: 'Play', url: `${GAME_URL}?userId=${telegramUserId}` }]
             ]
         }
     });

@@ -42,6 +42,44 @@
         <div class="target" onclick="increaseScore()"></div>
     </div>
     <script>
+        import { initializeApp } from 'firebase/app';
+        import { getAnalytics } from "firebase/analytics";
+        import { getFirestore, collection, addDoc } from 'firebase/firestore';
+
+        // Firebase yapılandırma nesneniz
+        const firebaseConfig = {
+            apiKey: "AIzaSyCO7-e9DT3uLsk1ej-DXblbOloUgBDm_uc",
+            authDomain: "nugo-ea4a5.firebaseapp.com",
+            projectId: "nugo-ea4a5",
+            storageBucket: "nugo-ea4a5.appspot.com",
+            messagingSenderId: "526788026458",
+            appId: "1:526788026458:web:f1d09c26fedd94f3313863",
+            measurementId: "G-VCFC8SYWFV"
+        };
+
+        // Firebase uygulamasını başlat
+        const app = initializeApp(firebaseConfig);
+
+        const analytics = getAnalytics(app);
+        // Firestore örneğini al
+        const db = getFirestore(app);
+
+        // Veri eklemek için bir fonksiyon
+        async function addData() {
+            try {
+                const docRef = await addDoc(collection(db, "users"), {
+                    first: "Ada",
+                    last: "Lovelace",
+                    born: 1815
+                });
+                console.log("Document written with ID: ", docRef.id);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+
+        // Fonksiyonu çağır
+        addData();
         let score = 0;
 
         function increaseScore() {

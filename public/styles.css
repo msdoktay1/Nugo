@@ -1,0 +1,347 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to bottom right, rgb(48, 48, 48), rgb(0, 0, 0));
+    box-shadow: 0 0 20px rgba(255, 30, 0, 0.733);
+    background-color: #1a1a1a;
+}
+
+#container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 85vh;
+}
+
+.circle-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.circle-border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 70vw;
+    position: relative;
+    border: 10px solid rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    padding: 20px;
+    background: linear-gradient(to bottom right, black, navy);
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.8);
+    overflow: hidden;
+    margin: auto;
+    /* Ekranın ortasında olmasını sağlar */
+}
+
+#goatImage {
+    user-select: none;
+    display: block;
+    width: 60%;
+    height: auto;
+    object-fit: cover;
+}
+
+.movingImage {
+    position: fixed;
+    width: 10vw;
+    height: 10vw;
+    background-image: url('models/goat1/coin2.png');
+    background-size: cover;
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
+    z-index: 1000;
+}
+
+.counter {
+    user-select: none;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    left: 50%;
+    pointer-events: none;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: block;
+    opacity: 1;
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.counter.hide {
+    bottom: 20px;
+    opacity: 0;
+}
+
+.game-container {
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .score {
+        font-size: 2vw;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        /*background-color: rgb(206, 185, 0);
+    /* Yarı saydam siyah arka plan */
+        border-radius: 5px;
+        /* İstenilen şekilde ölçeklendirme */
+        /* Küçük ekranlarda daha büyük font boyutu */
+    }
+
+    .score-icon {
+        width: 15%;
+        /* Küçük ekranlarda daha küçük ikon */
+    }
+
+    .box {
+        font-size: 3vw;
+    }
+}
+
+@media (min-width: 1200px) {
+    .score {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: rgb(255, 0, 0);
+        /*background-color: rgb(206, 185, 0);
+    /* Yarı saydam siyah arka plan */
+        font-size: 3vw;
+        border-radius: 5px;
+        /* İstenilen şekilde ölçeklendirme */
+        /* Büyük ekranlarda daha küçük font boyutu */
+    }
+
+    .score-icon {
+        width: 20%;
+        /* Büyük ekranlarda daha büyük ikon */
+    }
+
+    .box {
+        font-size: 1vw;
+    }
+}
+
+.score {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    /* İkon ve metni dikey olarak ortalar */
+    font-size: 8vw;
+    /* Metin boyutu, ekran genişliğine göre ayarlanabilir */
+    color: white;
+    /* Yarı saydam siyah arka plan */
+    padding: 2vw;
+    margin-top: 2vh;
+    margin-right: 4vw;
+    height: 5vh;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* İçerik boyutunu hesaba kat */
+}
+
+.score-icon {
+    /* İkonun genişliği */
+    width: 10vw;
+    height: 10vw;
+    /* İkonun yüksekliği */
+    /* İkon ve metin arasındaki boşluk */
+}
+
+.boxes-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 15vh;
+    /* Maksimum genişlik */
+    margin-bottom: 20px;
+    /* Alttan boşluk ekle */
+}
+
+.box1 {
+    width: 25vw;
+    height: 5vh;
+    flex: 1;
+    margin: 5px;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #3a3a3a;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 2.5vw;
+    color: orange;
+    /* Metin boyutu */
+}
+
+.box2 {
+    width: 25vw;
+    height: 5vh;
+    flex: 1;
+    margin: 5px;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #3a3a3a;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 2.5vw;
+    color: rgba(0, 129, 250, 0.945);
+    /* Metin boyutu */
+}
+
+.box3 {
+    width: 25vw;
+    height: 5vh;
+    flex: 1;
+    margin: 5px;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #3a3a3a;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 2.5vw;
+    color: rgb(0, 175, 0);
+    /* Metin boyutu */
+}
+
+.tiklama-basi {
+    width: 25vw;
+    flex: 1;
+    text-align: center;
+    font-size: 4.2vw;
+    color: rgb(253, 253, 253);
+    /* Metin boyutu */
+}
+
+.level {
+    width: 25vw;
+    flex: 1;
+    text-align: center;
+    font-size: 4.2vw;
+    color: rgb(253, 253, 253);
+    /* Metin boyutu */
+}
+
+.saatlik {
+    width: 25vw;
+    flex: 1;
+    text-align: center;
+    font-size: 4.2vw;
+    color: rgb(253, 253, 253);
+    /* Metin boyutu */
+}
+
+.box-text {
+    white-space: nowrap;
+    /* İçeriğin tek satırda sığmasını sağlar */
+}
+
+#spinner {
+    width: 100vw;
+    height: 100vh;
+}
+
+#spinner {
+    width: 3em;
+    height: 3em;
+    cursor: not-allowed;
+    display: block;
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid #444;
+    box-shadow: -10px -10px 10px #6359f8, 0px -10px 10px 0px #9c32e2, 10px -10px 10px #f36896, 10px 0 10px #ff0b0b, 10px 10px 10px 0px #ff5500, 0 10px 10px 0px #ff9500, -10px 10px 10px 0px #ffb700;
+    animation: rot55 0.7s linear infinite;
+    top: 50%;
+    left: 45%;
+    background-color: transparent;
+    /* Arka plan rengini şeffaf olarak ayarla */
+}
+
+.spinnerin {
+    border: 2px solid #444;
+    width: 1.5em;
+    height: 1.5em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rot55 {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+nav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #333;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+#nav-bar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+#nav-bar a#active {
+    background-color: #007BFF;
+}
